@@ -27,7 +27,7 @@ public class SigninPage extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Find the Google Sign-In button
+        // Find the Google Sign-In buttonz
         SignInButton signInButton = view.findViewById(R.id.btn_google_sign_in);
 
         if (signInButton == null) {
@@ -41,7 +41,7 @@ public class SigninPage extends Fragment {
         signInButton.setOnClickListener(v -> {
             Log.d("SigninPage", "✅ Google Sign-In Button Clicked!");
             if (getActivity() instanceof MainActivity) {
-                ((MainActivity) getActivity()).signInWithGoogle();
+           //     ((MainActivity) getActivity()).signInWithGoogle();
             } else {
                 Log.e("SigninPage", "❌ MainActivity not detected!");
             }
