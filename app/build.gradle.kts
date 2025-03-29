@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+   // id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -49,9 +50,16 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation("com.google.firebase:firebase-auth:22.3.0")  // Firebase Authentication
-    implementation("com.google.android.gms:play-services-auth:20.7.0") // Google Sign-In
+   // implementation("com.google.firebase:firebase-auth:22.3.0")  // Firebase Authentication
+    //implementation("com.google.android.gms:play-services-auth:20.7.0") // Google Sign-In
     implementation("com.google.firebase:firebase-firestore:24.9.1") // Firestore Database
     implementation("com.google.firebase:firebase-database:20.3.0") // Realtime Database
     implementation("com.google.firebase:firebase-storage:20.3.0") // Firebase Storage
+    implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
+
 }
