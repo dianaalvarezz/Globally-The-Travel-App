@@ -32,6 +32,7 @@ public class HomePage extends Fragment implements OnMapReadyCallback {
         rootView = inflater.inflate(R.layout.fragment_homepage, container, false);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
@@ -42,6 +43,7 @@ public class HomePage extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
+        updateMap();
 
         LatLngBounds worldBounds = new LatLngBounds(
                 new LatLng(-70, -140),
@@ -83,4 +85,30 @@ public class HomePage extends Fragment implements OnMapReadyCallback {
     }
 
 
+    // In HomePage.java:
+    public void updateMap() {
+        if (mMap != null) {
+            mMap.clear(); // Clear existing markers
+
+            SharedPreferences prefs = requireContext().getSharedPreferences("GlobellyPins", Context.MODE_PRIVATE);
+            Map<String, ?> allPins = prefs.getAll();
+
+            for (Map.Entry<String, ?> entry : allPins.entrySet()) {
+                String value = entry.getValue().toString(); // Format: lat,lng,country
+                String[] parts = value.split(",");
+                if (parts.length == 3) {
+                    double lat = Double.parseDouble(parts[0]);
+                    double lng = Double.parseDouble(parts[1]);
+                    String country = parts[2];
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(country));
+                }
+            }
+        }
+    }
 }
+
+
+
+
+
+
