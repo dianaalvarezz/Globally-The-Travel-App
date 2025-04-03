@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
-import edu.niu.android.globally.PostPage.Pin;
+import edu.niu.android.globally.Pin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -51,15 +51,18 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
         // Update the map in PostPage
         // Inside removePin():
         // Inside removePin():
+        // Update the map in PostPage
         if (postPage != null) {
             postPage.updateMap();
-            // Force reload HomePage
         }
+
+
     }
 
     @NonNull
     @Override
-    public PinViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PinViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         View view = LayoutInflater.from(context).inflate(R.layout.pin_item, parent, false);
         return new PinViewHolder(view);
     }
@@ -86,7 +89,8 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
         return pinList.size();
     }
 
-    public static class PinViewHolder extends RecyclerView.ViewHolder {
+    public static class PinViewHolder extends RecyclerView.ViewHolder
+    {
         TextView countryTextView, locationTextView;
         Button removeButton;
 

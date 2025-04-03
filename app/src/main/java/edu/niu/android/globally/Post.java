@@ -1,18 +1,18 @@
 package edu.niu.android.globally;
 
-public class Post {
-    public String imageUrl;
-    public String city;
-    public String country;
-    public String caption;
+public class Post
+{
+    public String imageUrl, city, country, caption, lat, lng;
 
-    // Required empty constructor for Firebase
     public Post() {}
 
-    public Post(String imageUrl, String city, String country, String caption) {
+    public Post(String imageUrl, String city, String country, String caption, String lat, String lng)
+    {
         this.imageUrl = imageUrl;
         this.city = city;
         this.country = country;
         this.caption = caption;
+        this.lat = lat;
+        this.lng = lng;
     }
 }

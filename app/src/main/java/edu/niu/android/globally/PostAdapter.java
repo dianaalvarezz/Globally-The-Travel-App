@@ -12,17 +12,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import android.widget.Button;
+import android.util.Log;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private Context context;
     private List<Post> postList;
+    private List<String> postKeys;
+    private PostDeleteListener deleteListener;
 
-    public PostAdapter(Context context, List<Post> postList)
+
+    public interface PostDeleteListener
+    {
+        void onDelete(Post post, String firebaseKey);
+    }
+
+
+
+
+    public PostAdapter(Context context, List<Post> postList, List<String> postKeys, PostDeleteListener listener)
     {
         this.context = context;
         this.postList = postList;
+        this.postKeys = postKeys;
+        this.deleteListener = listener;
     }
+
+
+
 
     @Override
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
@@ -30,6 +48,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         return new PostViewHolder(view);
     }
+
+
+
 
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position)
@@ -39,7 +60,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.countryText.setText(post.country);
         holder.captionText.setText(post.caption);
         Glide.with(context).load(post.imageUrl).into(holder.imageView);
+
+        holder.deleteButton.setOnClickListener(v ->
+        {
+            Log.d("DELETE_BTN", "Delete button clicked at position " + position);
+
+            if (deleteListener != null)
+            {
+                Log.d("DELETE_BTN", "Calling deleteListener.onDelete()");
+                deleteListener.onDelete(post, postKeys.get(position));
+            }
+            else
+            {
+                Log.e("DELETE_BTN", "deleteListener is null!");
+            }
+        });
+
+
     }
+
+
+
 
     @Override
     public int getItemCount()
@@ -47,17 +88,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return postList.size();
     }
 
+
+
+
     public static class PostViewHolder extends RecyclerView.ViewHolder
     {
         ImageView imageView;
         TextView cityText, countryText, captionText;
+        Button deleteButton;
 
-        public PostViewHolder(View itemView) {
+        public PostViewHolder(View itemView)
+        {
             super(itemView);
             imageView = itemView.findViewById(R.id.postImage);
             cityText = itemView.findViewById(R.id.postCity);
             countryText = itemView.findViewById(R.id.postCountry);
             captionText = itemView.findViewById(R.id.postCaption);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
 }

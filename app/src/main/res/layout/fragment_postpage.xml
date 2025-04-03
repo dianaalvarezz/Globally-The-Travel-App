@@ -23,13 +23,6 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
-        <Button
-            android:id="@+id/addLocationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Add Location"
-            android:layout_marginBottom="16dp" />
 
         <!-- Photos Section -->
         <TextView
@@ -79,26 +72,13 @@
             android:layout_height="wrap_content"
             android:hint="Caption" />
 
-        <Button
-            android:id="@+id/uploadButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Upload Photo" />
-
-        <!-- Uploaded Posts Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Uploaded Posts"
-            android:padding="8dp"
-            android:textStyle="bold" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/uploadedPostsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
+            android:layout_marginTop="16dp"
+            />
+
 
     </LinearLayout>
 </ScrollView>
